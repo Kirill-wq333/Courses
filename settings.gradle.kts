@@ -20,5 +20,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Courses"
-include(":app", ":features:dynamicfeature")
+include(":app")
 include(":data")

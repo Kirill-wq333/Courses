@@ -3,6 +3,7 @@ package com.example.courses.ui.feature.presintashion.home.viewmodel
 import com.example.courses.core.viewmodel.ViewEffect
 import com.example.courses.core.viewmodel.ViewEvent
 import com.example.courses.core.viewmodel.ViewState
+import com.example.data.ui.feature.presintashion.home.datasource.dto.Courses
 
 object HomeContract {
     sealed interface State: ViewState {

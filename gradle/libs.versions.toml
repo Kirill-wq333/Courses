@@ -1,8 +1,8 @@
 [versions]
 agp = "8.10.1"
 converterGson = "2.9.0"
-hiltAndroid = "2.48"
-hiltCompiler = "2.48"
+hiltAndroid = "2.49"
+hiltCompiler = "2.49"
 hiltNavigationCompose = "1.1.0"
 hiltLifecycleViewmodel = "1.0.0-alpha03"
 kotlin = "2.0.21"
@@ -14,10 +14,11 @@ composeNavigation = "2.9.0"
 kotlinxCoroutinesAndroid = "1.7.3"
 lifecycleRuntimeKtx = "2.9.0"
 activityCompose = "1.10.1"
-hilt = "2.48"
+hilt = "2.49"
 composeBom = "2025.05.01"
 lifecycleViewmodelKtx = "2.6.1"
 loggingInterceptor = "4.12.0"
+mytrackerSdk = "3.0.12"
 retrofit = "2.9.0"
 
 [libraries]
@@ -29,6 +30,7 @@ androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-view
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompiler" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+androidx-hilt-work = { group = "androidx.hilt", name = "hilt-work", version = "1.0.0" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -45,6 +47,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
+mytracker-sdk = { module = "com.my.tracker:mytracker-sdk", version.ref = "mytrackerSdk" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]
@@ -53,5 +56,5 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version = "1.9.10" }
-android-dynamic-feature = { id = "com.android.dynamic-feature", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
 

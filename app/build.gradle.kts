@@ -33,38 +33,40 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
+    kapt {
+        correctErrorTypes = true
+        arguments {
+            arg("dagger.hilt.internal.useAggregatingRootProcessor", "true")
+        }
+    }
+
     kotlinOptions {
         jvmTarget = "17"
     }
     buildFeatures {
         compose = true
     }
-
-    dynamicFeatures += setOf(":features:dynamicfeature")
-
 }
 
 dependencies {
 
+    implementation (libs.mytracker.sdk)
+
     // Hilt Core
-    implementation (libs.hilt.android)
-    kapt (libs.hilt.compiler)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    // Для поддержки ViewModel с Hilt
-    implementation (libs.androidx.hilt.navigation.compose)
-    // ИЛИ для обычного Android:
-    implementation (libs.androidx.hilt.lifecycle.viewmodel)
-    kapt (libs.androidx.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.androidx.hilt.compiler)
 
-    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
-    // Retrofit
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
-    implementation (libs.logging.interceptor)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
-    // Для корутин
-    implementation (libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
