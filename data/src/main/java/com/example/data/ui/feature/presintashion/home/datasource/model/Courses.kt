@@ -1,4 +1,4 @@
-package com.example.data.ui.feature.presintashion.home.datasource.dto
+package com.example.data.ui.feature.presintashion.home.datasource.model
 
 data class Courses(
     val id: Int,
@@ -9,8 +9,4 @@ data class Courses(
     val startDate: String,
     val hasLike: Boolean,
     val publishDate: String
-)
-
-data class CoursesResponse(
-    val courses: List<Courses>
 )

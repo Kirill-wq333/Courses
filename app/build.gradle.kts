@@ -37,7 +37,7 @@ android {
     kapt {
         correctErrorTypes = true
         arguments {
-            arg("dagger.hilt.internal.useAggregatingRootProcessor", "true")
+            arg("dagger.hilt.internal.useAggregatingRootProcessor", "false")
         }
     }
 

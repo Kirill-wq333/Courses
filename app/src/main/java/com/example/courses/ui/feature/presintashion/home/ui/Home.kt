@@ -19,7 +19,7 @@ import com.example.courses.ui.feature.presintashion.home.viewmodel.HomeContract
 import com.example.courses.ui.feature.presintashion.home.viewmodel.HomeViewModel
 import com.example.courses.ui.feature.shared.screens.home.componetns.Courses
 import com.example.courses.ui.feature.shared.screens.home.componetns.DateAdd
-import com.example.data.ui.feature.presintashion.home.datasource.dto.Courses
+import com.example.data.ui.feature.presintashion.home.datasource.model.Courses
 
 @Composable
 fun HomeScreen(
