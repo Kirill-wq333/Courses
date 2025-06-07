@@ -30,9 +30,25 @@ import androidx.compose.ui.unit.dp
 import com.example.courses.R
 import com.example.courses.ui.theme.CoursesTypography
 import com.example.courses.ui.theme.colors
+import com.example.data.ui.feature.presintashion.home.datasource.model.Courses
+import com.example.data.ui.feature.presintashion.home.datasource.model.CoursesList
 
 @Composable
 fun Courses(
+    courses: Courses
+) {
+    Course(
+        hasLike = courses.hasLike,
+        rate = courses.rate,
+        title = courses.title,
+        text = courses.text,
+        price = courses.price,
+        publishedDate = courses.publishDate,
+    )
+}
+
+@Composable
+fun Course(
     hasLike: Boolean,
     rate: String,
     title: String,
