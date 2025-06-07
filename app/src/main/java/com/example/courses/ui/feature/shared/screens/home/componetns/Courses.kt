@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,8 +18,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -105,9 +109,9 @@ fun BottomContentCourses(
         )
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = text,
+            text = text.limit(100),
             color = MaterialTheme.colors.white,
-            style = CoursesTypography.labelLarge
+            style = CoursesTypography.labelLarge,
         )
         Spacer(modifier = Modifier.height(10.dp))
         Row(
@@ -130,10 +134,19 @@ fun BottomContentCourses(
                 )
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.ic_arrow_right),
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.Unspecified
                 )
             }
         }
+    }
+}
+
+fun String.limit(maxLength: Int): String {
+    return if (this.length > maxLength) {
+        this.take(maxLength) + "..."
+    } else {
+        this
     }
 }
 
@@ -146,7 +159,11 @@ fun Image(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
+            .height(114.dp)
+            .background(
+                color = MaterialTheme.colors.green,
+                shape = RoundedCornerShape(12.dp)
+            )
     ){
         FavouriteButton(
             hasLike = hasLike,
@@ -172,15 +189,15 @@ fun RateAndDate(
 ) {
     Row(
         modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Box(
             modifier = modifier
                 .background(
-                    color = MaterialTheme.colors.glass,
+                    color = MaterialTheme.colors.glass.copy(0.3f),
                     shape = RoundedCornerShape(12.dp)
-                )
-                .blur(16.dp),
+                ),
             contentAlignment = Alignment.Center
         ){
             Row(
@@ -189,6 +206,7 @@ fun RateAndDate(
                         horizontal = 6.dp,
                         vertical = 4.dp
                     ),
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Icon(
@@ -207,16 +225,20 @@ fun RateAndDate(
         Box(
             modifier = modifier
                 .background(
-                    color = MaterialTheme.colors.glass,
+                    color = MaterialTheme.colors.glass.copy(0.3f),
                     shape = RoundedCornerShape(12.dp)
-                )
-                .blur(16.dp),
+                ),
             contentAlignment = Alignment.Center
         ){
             Text(
                 text = publishedDate,
                 color = MaterialTheme.colors.white,
-                style = CoursesTypography.labelSmall
+                style = CoursesTypography.labelSmall,
+                modifier = Modifier
+                    .padding(
+                        horizontal = 6.dp,
+                        vertical = 4.dp
+                    )
             )
         }
     }
@@ -230,18 +252,16 @@ fun FavouriteButton(
     Box(
         modifier = modifier
             .background(
-                color = MaterialTheme.colors.glass,
+                color = MaterialTheme.colors.glass.copy(0.3f),
                 shape = RoundedCornerShape(20.dp)
-            )
-            .blur(16.dp),
+            ),
         contentAlignment = Alignment.Center
     ){
         Icon(
-            imageVector = ImageVector.vectorResource(R.drawable.ic_favourite),
+            imageVector = ImageVector.vectorResource(if (hasLike)R.drawable.ic_green_favourite else R.drawable.ic_favourite),
             contentDescription = null,
-            tint = if (hasLike) MaterialTheme.colors.green else MaterialTheme.colors.white,
+            tint = Color.Unspecified,
             modifier = Modifier
-                .size(16.dp)
                 .padding(6.dp)
         )
     }

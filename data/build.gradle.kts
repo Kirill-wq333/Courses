@@ -45,8 +45,6 @@ dependencies {
 
     // Для поддержки ViewModel с Hilt
     implementation (libs.androidx.hilt.navigation.compose)
-    // ИЛИ для обычного Android:
-    implementation (libs.androidx.hilt.lifecycle.viewmodel)
     kapt (libs.androidx.hilt.compiler)
 
     implementation (libs.androidx.lifecycle.viewmodel.ktx)

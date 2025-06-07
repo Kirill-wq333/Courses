@@ -1,6 +1,9 @@
 package com.example.courses.di
 
 import com.example.data.ui.feature.presintashion.home.datasource.CoursesApiService
+import com.example.data.ui.feature.presintashion.home.datasource.repository.CoursesRepository
+import com.example.data.ui.feature.presintashion.home.datasource.repository.CoursesRepositoryImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,11 +29,17 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://drive.usercontent.google.com/")
-            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    })
+                    .build()
+            )
             .build()
     }
 
