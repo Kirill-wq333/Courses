@@ -1,4 +1,4 @@
-package com.example.data.ui.feature.presintashion.home.datasource.model
+package com.example.domain.ui.feature.presintashion.home.model
 
 data class Courses(
     val id: Int,

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -67,7 +68,7 @@ fun BottomBar(
             icon = R.drawable.ic_house
         ),
         BottomBarItems(
-            route = "",
+            route = AppRouts.FAVOURITE,
             label = stringResource(R.string.favourite_button),
             icon = R.drawable.ic_favourite
         ),
@@ -82,34 +83,38 @@ fun BottomBar(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    start = 8.dp,
-                    top = 12.dp,
-                    bottom = 16.dp,
-                    end = 8.dp
-                ),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            bottomBarItems.forEach { item ->
-                val isSelected = currentRoute == item.route
+        Column {
+            HorizontalDivider(modifier = Modifier.fillMaxWidth()
+                .background(color = MaterialTheme.colors.stroke))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = 8.dp,
+                        top = 12.dp,
+                        bottom = 16.dp,
+                        end = 8.dp
+                    ),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                bottomBarItems.forEach { item ->
+                    val isSelected = currentRoute == item.route
 
-                val color = if (isSelected) MaterialTheme.colors.green
+                    val color = if (isSelected) MaterialTheme.colors.green
                     else MaterialTheme.colors.white
 
-                val boxColor = if (isSelected) MaterialTheme.colors.lightGray
-                else Color.Unspecified
+                    val boxColor = if (isSelected) MaterialTheme.colors.lightGray
+                    else Color.Unspecified
 
-                BottomBarItem(
-                    icon = item.icon,
-                    text = item.label,
-                    color = color,
-                    onClick = { navController.navigate(item.route) },
-                    boxColor = boxColor
-                )
+                    BottomBarItem(
+                        icon = item.icon,
+                        text = item.label,
+                        color = color,
+                        onClick = { navController.navigate(item.route) },
+                        boxColor = boxColor
+                    )
+                }
             }
         }
     }

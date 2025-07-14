@@ -1,7 +1,7 @@
 package com.example.data.ui.core.module
 
-import com.example.data.ui.feature.presintashion.home.datasource.repository.CoursesRepository
-import com.example.data.ui.feature.presintashion.home.datasource.repository.CoursesRepositoryImpl
+import com.example.data.ui.feature.presintashion.home.CoursesRepositoryImpl
+import com.example.domain.ui.feature.presintashion.home.repository.CoursesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

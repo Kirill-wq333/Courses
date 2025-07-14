@@ -1,9 +1,6 @@
 package com.example.courses.di
 
 import com.example.data.ui.feature.presintashion.home.datasource.CoursesApiService
-import com.example.data.ui.feature.presintashion.home.datasource.repository.CoursesRepository
-import com.example.data.ui.feature.presintashion.home.datasource.repository.CoursesRepositoryImpl
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

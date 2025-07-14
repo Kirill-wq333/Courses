@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -30,8 +31,8 @@ import androidx.compose.ui.unit.dp
 import com.example.courses.R
 import com.example.courses.ui.theme.CoursesTypography
 import com.example.courses.ui.theme.colors
-import com.example.data.ui.feature.presintashion.home.datasource.model.Courses
-import com.example.data.ui.feature.presintashion.home.datasource.model.CoursesList
+import com.example.domain.ui.feature.presintashion.home.model.Courses
+import com.example.domain.ui.feature.presintashion.home.model.CoursesList
 
 @Composable
 fun Courses(
@@ -177,7 +178,7 @@ fun Image(
             .fillMaxWidth()
             .height(114.dp)
             .background(
-                color = MaterialTheme.colors.green,
+                color = MaterialTheme.colors.white,
                 shape = RoundedCornerShape(12.dp)
             )
     ){
@@ -203,19 +204,53 @@ fun RateAndDate(
     publishedDate: String,
     rate: String
 ) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
-        Box(
-            modifier = modifier
-                .background(
-                    color = MaterialTheme.colors.glass.copy(0.3f),
-                    shape = RoundedCornerShape(12.dp)
-                ),
-            contentAlignment = Alignment.Center
-        ){
+    Box(modifier = modifier) {
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+                Box(
+                    modifier = Modifier
+                        .size(46.dp, 22.dp)
+                        .blur(
+                            radius = 16.dp,
+                            edgeTreatment = BlurredEdgeTreatment(RoundedCornerShape(16.dp))
+                        )
+                        .graphicsLayer {
+                            shape = RoundedCornerShape(16.dp)
+                            clip = true
+                        }
+                        .background(
+                            color = MaterialTheme.colors.glass.copy(0.3f),
+                        )
+
+
+                )
+
+
+            Box(
+                modifier = Modifier
+                    .size(87.dp, 22.dp)
+                    .blur(
+                        radius = 16.dp,
+                        edgeTreatment = BlurredEdgeTreatment(RoundedCornerShape(16.dp))
+                    )
+                    .graphicsLayer {
+                        shape = RoundedCornerShape(16.dp)
+                        clip = true
+                    }
+                    .background(
+                        color = MaterialTheme.colors.glass.copy(0.3f),
+                    )
+            )
+        }
+        Row(
+            modifier = Modifier,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+
             Row(
                 modifier = Modifier
                     .padding(
@@ -236,28 +271,16 @@ fun RateAndDate(
                     style = CoursesTypography.labelSmall
                 )
             }
-        }
 
-        Box(
-            modifier = modifier
-                .background(
-                    color = MaterialTheme.colors.glass.copy(0.3f),
-                    shape = RoundedCornerShape(12.dp)
-                ),
-            contentAlignment = Alignment.Center
-        ){
+
             Text(
                 text = publishedDate,
                 color = MaterialTheme.colors.white,
                 style = CoursesTypography.labelSmall,
-                modifier = Modifier
-                    .padding(
-                        horizontal = 6.dp,
-                        vertical = 4.dp
-                    )
             )
         }
     }
+
 }
 
 @Composable

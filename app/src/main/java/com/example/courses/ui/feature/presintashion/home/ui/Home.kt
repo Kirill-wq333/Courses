@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -39,19 +40,9 @@ import com.example.courses.ui.feature.shared.screens.home.componetns.Courses
 import com.example.courses.ui.feature.shared.screens.home.componetns.DateAdd
 import com.example.courses.ui.feature.shared.text.textfield.CustomSearchBar
 import com.example.courses.ui.theme.colors
-import com.example.data.ui.feature.presintashion.home.datasource.model.Courses
-import com.example.data.ui.feature.presintashion.home.datasource.model.CoursesList
+import com.example.domain.ui.feature.presintashion.home.model.Courses
+import com.example.domain.ui.feature.presintashion.home.model.CoursesList
 import retrofit2.http.Query
-
-//@Preview
-//@Composable
-//private fun HomeScreenPreview() {
-//    HomeContent(
-//        courses = Mock.demoCourses,
-//        modifier = Modifier
-//    )
-//}
-
 
 @Composable
 fun HomeScreen(
@@ -59,9 +50,13 @@ fun HomeScreen(
 ) {
 
     val courses by vm.courses.collectAsState()
-
+    val isLoading by vm.isLoading
     var query by remember { mutableStateOf("") }
 
+
+    LaunchedEffect(query) {
+        vm.handleEvent(HomeContract.Event.SearchCourses(query))
+    }
     LaunchedEffect(Unit) {
         vm.handleEvent(HomeContract.Event.FetchCourses)
     }
@@ -73,12 +68,16 @@ fun HomeScreen(
                 onQueryChange = { query = it }
             )
         }
-    ) {
-        HomeContent(
-            modifier = Modifier
-                .padding(it),
-            courses = courses
-        )
+    ) { padding ->
+        Box(modifier = Modifier.fillMaxWidth().padding(padding)) {
+            if (isLoading) {
+                CircularProgressIndicator(Modifier.align(Alignment.Center))
+            } else {
+                HomeContent(
+                    courses = courses
+                )
+            }
+        }
     }
 }
 
@@ -120,7 +119,7 @@ fun TopBar(
 
 @Composable
 private fun HomeContent(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     courses: CoursesList
 ) {
     Column(

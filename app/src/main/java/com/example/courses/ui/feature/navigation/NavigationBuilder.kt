@@ -12,6 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.courses.ui.feature.approuts.AppRouts
 import com.example.courses.ui.feature.presintashion.entrance.ui.EntranceScreen
+import com.example.courses.ui.feature.presintashion.favourite.ui.FavouriteScreen
+import com.example.courses.ui.feature.presintashion.favourite.viewmodel.FavouriteViewModel
 import com.example.courses.ui.feature.presintashion.home.ui.HomeScreen
 import com.example.courses.ui.feature.presintashion.home.viewmodel.HomeViewModel
 
@@ -38,9 +40,16 @@ fun NavigationBuilder(
         }
 
         composable(route = AppRouts.HOME) {
-            val vm = hiltViewModel<HomeViewModel>()
+            val vmHome = hiltViewModel<HomeViewModel>()
             HomeScreen(
-                vm = vm
+                vm = vmHome
+            )
+        }
+
+        composable(route = AppRouts.FAVOURITE) {
+            val vmFavourite = hiltViewModel<FavouriteViewModel>()
+            FavouriteScreen(
+                vm = vmFavourite
             )
         }
 

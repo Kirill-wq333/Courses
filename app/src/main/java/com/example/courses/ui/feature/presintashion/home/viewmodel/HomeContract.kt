@@ -6,6 +6,7 @@ object HomeContract {
 
     sealed interface Event: ViewEvent{
         data object FetchCourses : Event
+        data class SearchCourses(val query: String) : Event
     }
 
 }

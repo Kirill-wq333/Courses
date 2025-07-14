@@ -1,6 +1,6 @@
 package com.example.data.ui.feature.presintashion.home.datasource
 
-import com.example.data.ui.feature.presintashion.home.datasource.dto.CoursesListDto
+import com.example.data.ui.feature.presintashion.home.dto.CoursesListDto
 import retrofit2.http.GET
 import retrofit2.http.Url
 

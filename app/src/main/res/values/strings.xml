@@ -12,6 +12,7 @@
     <string name="not_account">Нету аккаунта?</string>
     <string name="favourite_button">Избранное</string>
     <string name="home_button">Главная</string>
+    <string name="favourite">Избранное</string>
     <string name="enter_password">Введите пароль</string>
     <string name="enter_email">example@gmail.com</string>
     <string name="account_button">Аккаунт</string>
