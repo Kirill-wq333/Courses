@@ -1,13 +1,12 @@
 package com.example.data.ui.feature.presintashion.home.datasource
 
-import com.example.data.ui.feature.presintashion.home.datasource.dto.CoursesDto
+import com.example.data.ui.feature.presintashion.home.datasource.dto.CoursesListDto
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface CoursesApiService {
-    @GET("https://drive.usercontent.google.com/u/0/uc")
+    @GET
     suspend fun getCourses(
-        @Query("id") id: String = "15arTK7XT2b7Yv4BJsmDctA4Hq-BbS8-q",
-        @Query("export") export: String = "download"
-    ): List<CoursesDto>
+        @Url url: String = "https://drive.usercontent.google.com/u/0/uc?id=15arTK7XT2b7Yv4BJsmDctA4Hg-BbS8-q&export=download"
+    ): CoursesListDto
 }

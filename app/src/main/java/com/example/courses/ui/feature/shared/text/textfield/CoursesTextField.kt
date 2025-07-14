@@ -15,6 +15,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.courses.ui.theme.CoursesTypography
@@ -68,10 +70,13 @@ fun CustomTextField(
                 color = MaterialTheme.colors.lightGray,
                 shape = RoundedCornerShape(30.dp)
             ),
-        textStyle = LocalTextStyle.current.copy(),
+        textStyle = TextStyle(
+            color = MaterialTheme.colors.white
+        ),
         keyboardOptions = keyboardOptions,
         visualTransformation = visualTransformation,
         singleLine = singleLine,
+        cursorBrush = SolidColor(MaterialTheme.colors.white),
         maxLines = maxLines,
         decorationBox = { innerTextField ->
             Box(

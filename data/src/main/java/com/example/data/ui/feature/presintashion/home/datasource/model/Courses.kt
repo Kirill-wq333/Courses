@@ -10,3 +10,7 @@ data class Courses(
     val hasLike: Boolean,
     val publishDate: String
 )
+
+data class CoursesList(
+    val courses: List<Courses>
+)
