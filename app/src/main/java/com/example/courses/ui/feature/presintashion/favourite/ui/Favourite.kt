@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,22 +31,24 @@ import com.example.domain.ui.feature.presintashion.home.model.CoursesList
 
 @Composable
 fun FavouriteScreen(
-    modifier: Modifier = Modifier,
     vm: FavouriteViewModel
 ) {
     val courses by vm.courses.collectAsState()
+    val isLoading by vm.isLoading
 
     LaunchedEffect(Unit) {
         vm.handleEvent(FavouriteContract.Event.FetchCourses)
     }
         FavouriteContent(
-            courses = courses
+            courses = courses,
+            isLoading = isLoading
         )
 }
 
 @Composable
 fun FavouriteContent(
-    courses: CoursesList
+    courses: CoursesList,
+    isLoading: Boolean
 ) {
     val likedCourses = courses.courses.filter { it.hasLike }
 
@@ -61,13 +64,20 @@ fun FavouriteContent(
             style = CoursesTypography.titleSmall
         )
         Spacer(modifier = Modifier.height(16.dp))
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            items(likedCourses) { item ->
-                Courses(courses = item)
+
+        Box(modifier = Modifier.fillMaxWidth()) {
+            if (isLoading) {
+                CircularProgressIndicator(Modifier.align(Alignment.Center))
+            } else {
+                LazyColumn(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(likedCourses) { item ->
+                        Courses(courses = item)
+                    }
+                }
             }
         }
     }

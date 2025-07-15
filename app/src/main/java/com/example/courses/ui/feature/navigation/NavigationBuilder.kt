@@ -16,6 +16,8 @@ import com.example.courses.ui.feature.presintashion.favourite.ui.FavouriteScreen
 import com.example.courses.ui.feature.presintashion.favourite.viewmodel.FavouriteViewModel
 import com.example.courses.ui.feature.presintashion.home.ui.HomeScreen
 import com.example.courses.ui.feature.presintashion.home.viewmodel.HomeViewModel
+import com.example.courses.ui.feature.presintashion.onboarding.ui.OnboardingScreen
+import com.example.courses.ui.feature.presintashion.register.ui.RegistrationScreen
 
 @Composable
 fun NavigationBuilder(
@@ -25,7 +27,7 @@ fun NavigationBuilder(
 ) {
     NavHost(
         navController = navController,
-        startDestination = AppRouts.ENTRANCE,
+        startDestination = AppRouts.ONBOARDING,
         modifier = Modifier
             .padding(paddingValues)
             .background(Color.Black)
@@ -35,7 +37,8 @@ fun NavigationBuilder(
                 openHomeScreen = {
                     navController.navigate(AppRouts.HOME)
                     visibleBottomBar(true)
-                }
+                },
+                openRegistrationScreen = { navController.navigate(AppRouts.REGISTER) }
             )
         }
 
@@ -50,6 +53,21 @@ fun NavigationBuilder(
             val vmFavourite = hiltViewModel<FavouriteViewModel>()
             FavouriteScreen(
                 vm = vmFavourite
+            )
+        }
+        composable(route = AppRouts.ONBOARDING) {
+            OnboardingScreen(
+                openRegisterScreen = { navController.navigate(AppRouts.REGISTER) }
+            )
+        }
+
+        composable(route = AppRouts.REGISTER) {
+            RegistrationScreen(
+                openEntranceScreen = { navController.navigate(AppRouts.ENTRANCE) },
+                openHomeScreen = {
+                    navController.navigate(AppRouts.HOME)
+                    visibleBottomBar(true)
+                }
             )
         }
 

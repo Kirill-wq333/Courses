@@ -32,7 +32,9 @@ class HomeViewModel @Inject constructor(
 
     private fun fetchCourses() {
         viewModelScope.launch {
+            _isLoading.value = true
             _courses.value = repository.getCourses()
+            _isLoading.value = false
         }
     }
 

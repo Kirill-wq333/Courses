@@ -53,13 +53,17 @@ import androidx.core.net.toUri
 @Preview
 @Composable
 private fun EntranceScreenPreview() {
-    EntranceScreen {  }
+    EntranceScreen(
+        openHomeScreen = {},
+        openRegistrationScreen = {}
+    )
 }
 
 
 @Composable
 fun EntranceScreen(
-    openHomeScreen: () -> Unit
+    openHomeScreen: () -> Unit,
+    openRegistrationScreen: () -> Unit
 ) {
         Box(
             modifier = Modifier
@@ -68,14 +72,16 @@ fun EntranceScreen(
             contentAlignment = Alignment.Center
         ) {
             EntranceContent(
-                openHomeScreen = openHomeScreen
+                openHomeScreen = openHomeScreen,
+                openRegistrationScreen = openRegistrationScreen
             )
         }
 }
 
 @Composable
 fun EntranceContent(
-    openHomeScreen: () -> Unit
+    openHomeScreen: () -> Unit,
+    openRegistrationScreen: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -102,7 +108,8 @@ fun EntranceContent(
             onEmailChange = {email = it},
             onPasswordChange = {password = it},
             openHomeScreen = openHomeScreen,
-            enable = isValid
+            enable = isValid,
+            openRegistrationScreen = openRegistrationScreen
         )
     }
 }
@@ -114,7 +121,8 @@ private fun Content(
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     openHomeScreen: () -> Unit,
-    enable: Boolean
+    enable: Boolean,
+    openRegistrationScreen: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -130,11 +138,11 @@ private fun Content(
             enable = enable,
             onClick = openHomeScreen,
             text = stringResource(R.string.heading_entrance),
-            color = MaterialTheme.colors.green,
         )
         Spacer(modifier = Modifier.height(16.dp))
         NotAccountAndForgotYourPassword(
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            openRegistrationScreen = openRegistrationScreen
         )
         Spacer(modifier = Modifier.height(32.dp))
         HorizontalDivider(
@@ -186,7 +194,8 @@ private fun TextFieldEmailAndPassword(
 
 @Composable
 fun NotAccountAndForgotYourPassword(
-    modifier: Modifier
+    modifier: Modifier,
+    openRegistrationScreen: () -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -203,7 +212,7 @@ fun NotAccountAndForgotYourPassword(
                text = stringResource(R.string.small_registration),
                color = MaterialTheme.colors.green,
                style = CoursesTypography.labelMedium,
-               modifier = Modifier.clickable(onClick = {})
+               modifier = Modifier.clickable(onClick = openRegistrationScreen)
            )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -217,9 +226,7 @@ fun NotAccountAndForgotYourPassword(
 }
 
 @Composable
-private fun Services(
-    modifier: Modifier = Modifier
-) {
+fun Services() {
     val context = LocalContext.current
 
     Row(

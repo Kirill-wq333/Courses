@@ -1,6 +1,7 @@
 package com.example.courses.ui.feature.shared.screens.home.componetns
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
@@ -36,15 +41,19 @@ import com.example.domain.ui.feature.presintashion.home.model.CoursesList
 
 @Composable
 fun Courses(
-    courses: Courses
+    hasLike: Boolean,
+    courses: Courses,
 ) {
+    var hasLikeState by rememberSaveable { mutableStateOf(hasLike) }
+
     Course(
-        hasLike = courses.hasLike,
+        hasLike = hasLikeState,
         rate = courses.rate,
         title = courses.title,
         text = courses.text,
         price = courses.price,
         publishedDate = courses.publishDate,
+        onFavouriteClick = { hasLikeState = !hasLikeState }
     )
 }
 
@@ -55,6 +64,7 @@ fun Course(
     title: String,
     text: String,
     price: String,
+    onFavouriteClick: () -> Unit,
     publishedDate: String
 ) {
     Box(
@@ -71,7 +81,8 @@ fun Course(
             publishedDate = publishedDate,
             title = title,
             text = text,
-            price = price
+            price = price,
+            onFavouriteClick = onFavouriteClick
         )
     }
 }
@@ -83,6 +94,7 @@ fun CoursesContent(
     publishedDate: String,
     title: String,
     text: String,
+    onFavouriteClick: () -> Unit,
     price: String
 ) {
     Column(
@@ -93,7 +105,8 @@ fun CoursesContent(
         Image(
             hasLike = hasLike,
             rate = rate,
-            publishedDate = publishedDate
+            publishedDate = publishedDate,
+            onFavouriteClick = onFavouriteClick
         )
         BottomContentCourses(
             title = title,
@@ -171,6 +184,7 @@ fun String.limit(maxLength: Int): String {
 fun Image(
     hasLike: Boolean,
     rate: String,
+    onFavouriteClick: () -> Unit,
     publishedDate: String
 ) {
     Box(
@@ -186,7 +200,8 @@ fun Image(
             hasLike = hasLike,
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(8.dp)
+                .padding(8.dp),
+            onFavouriteClick = onFavouriteClick
         )
         RateAndDate(
             modifier = Modifier
@@ -286,14 +301,16 @@ fun RateAndDate(
 @Composable
 fun FavouriteButton(
     hasLike: Boolean,
-    modifier: Modifier
+    modifier: Modifier,
+    onFavouriteClick: () -> Unit
 ) {
     Box(
         modifier = modifier
             .background(
                 color = MaterialTheme.colors.glass.copy(0.3f),
                 shape = RoundedCornerShape(20.dp)
-            ),
+            )
+            .clickable {  onFavouriteClick() },
         contentAlignment = Alignment.Center
     ){
         Icon(

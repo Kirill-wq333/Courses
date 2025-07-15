@@ -30,19 +30,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.courses.R
-import com.example.courses.mock.Mock
 import com.example.courses.ui.feature.presintashion.home.viewmodel.HomeContract
 import com.example.courses.ui.feature.presintashion.home.viewmodel.HomeViewModel
 import com.example.courses.ui.feature.shared.screens.home.componetns.Courses
 import com.example.courses.ui.feature.shared.screens.home.componetns.DateAdd
 import com.example.courses.ui.feature.shared.text.textfield.CustomSearchBar
 import com.example.courses.ui.theme.colors
-import com.example.domain.ui.feature.presintashion.home.model.Courses
 import com.example.domain.ui.feature.presintashion.home.model.CoursesList
-import retrofit2.http.Query
 
 @Composable
 fun HomeScreen(
@@ -138,7 +134,7 @@ private fun HomeContent(
         ) {
             items(courses.courses) { item ->
                 Courses(
-                    courses = item
+                    courses = item,
                 )
             }
         }

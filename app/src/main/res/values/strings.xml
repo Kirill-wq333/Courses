@@ -4,16 +4,21 @@
     <string name="small_entrance">войти</string>
     <string name="heading_entrance">Вход</string>
     <string name="email">Email</string>
+    <string name="next_screen">Продолжить</string>
     <string name="password">Пароль</string>
+    <string name="repeat_password">Повторить пароль</string>
+    <string name="repeat_password_again">Введите пароль ещё раз</string>
     <string name="small_registration">Регистрация</string>
     <string name="forgot_your_password">Забыл пароль?</string>
     <string name="more_detailed">Подробнее</string>
     <string name="date_add">По дате добавления</string>
     <string name="not_account">Нету аккаунта?</string>
+    <string name="do_you_already_have_an_account">Уже есть аккаунт?</string>
     <string name="favourite_button">Избранное</string>
     <string name="home_button">Главная</string>
     <string name="favourite">Избранное</string>
     <string name="enter_password">Введите пароль</string>
     <string name="enter_email">example@gmail.com</string>
     <string name="account_button">Аккаунт</string>
+    <string name="one_hundred_courses">Тысячи курсов в одном месте</string>
 </resources>
