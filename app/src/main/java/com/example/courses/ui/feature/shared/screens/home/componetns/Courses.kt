@@ -41,10 +41,9 @@ import com.example.domain.ui.feature.presintashion.home.model.CoursesList
 
 @Composable
 fun Courses(
-    hasLike: Boolean,
     courses: Courses,
 ) {
-    var hasLikeState by rememberSaveable { mutableStateOf(hasLike) }
+    var hasLikeState by rememberSaveable { mutableStateOf(courses.hasLike) }
 
     Course(
         hasLike = hasLikeState,
